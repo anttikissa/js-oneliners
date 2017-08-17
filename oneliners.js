@@ -22,3 +22,6 @@ Object.keys(require.cache).forEach(key => require('fs').watch(key, () => process
 // Redirecting stderr is left as an exercise for the reader.
 require('child_process').exec(require('./package.json').scripts[process.argv[2]]).stdout.pipe(process.stdout);
 
+// Generate a UUID v4 too cleverly (source: https://gist.github.com/jed/982883)
+const uuid = (a) => a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, uuid);
+
