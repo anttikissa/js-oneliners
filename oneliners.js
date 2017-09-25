@@ -30,7 +30,7 @@ const uuid = (a) => a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e7] 
 // Source:
 // https://gist.github.com/ppseprus/afab8500dec6394c401734cb6922d220
 // Adapted to return the entropy of the whole message.
-const entropy = (s) => [...new Set(s)].map(c => s.match(new RegExp(c, 'g')).length).reduce((e, freq) => e + freq * Math.log2(s.length / freq), 0);
+const entropy = (s) => [...new Set(s)].map(c => s.match(RegExp(c, 'g')).length).reduce((e, freq) => e + freq * Math.log2(s.length / freq), 0);
 
 // The infamous pad2
 // Source: https://medium.com/@p_arithmetic/a-collection-of-my-6-favorite-javascript-one-liners-7c80a4b731f8
