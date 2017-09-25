@@ -26,7 +26,7 @@ const npmRun = () => require('child_process').exec(require('./package.json').scr
 const uuid = (a) => a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, uuid);
 
 // Calculate entropy of a message (such as a password)
-const entropy = (s) => [...new Set(s)].map(c => s.split('').filter(d => d == c).length).reduce((e, freq) => e + freq * Math.log2(s.length / freq), 0);
+const entropy = (s) => [...new Set(s)].map(c => s.split('').filter(d => d === c).length).reduce((e, freq) => e + freq * Math.log2(s.length / freq), 0);
 
 module.exports = {
 	entropy
