@@ -42,9 +42,13 @@ const pad2 = (s) => ('0' + s).substr(-2);
 // Shaved some characters by using .exec() instead of .match()
 const nth = (o) => o + (['st', 'nd', 'rd'][/1?\d\b/.exec(o) - 1] || 'th');
 
+// HTTP server that redirects all queries to HTTPS
+const redirect = () => require('http').createServer((req, res) => (res.writeHead(301, { location: `https://${req.headers.host}${req.url}` }), res.end())).listen(80);
+
 module.exports = {
 	checksum,
 	entropy,
 	nth,
-	pad2
+	pad2,
+	redirect
 };
