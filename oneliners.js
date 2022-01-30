@@ -45,6 +45,16 @@ const nth = (o) => o + (['st', 'nd', 'rd'][/1?\d\b/.exec(o) - 1] || 'th');
 // HTTP server that redirects all queries to HTTPS
 const redirect = () => require('http').createServer((req, res) => (res.writeHead(301, { location: `https://${req.headers.host}${req.url}` }), res.end())).listen(80);
 
+// Bind listeners to object (an EventEmitter) and return the object for convenience
+//
+// Example usage:
+//
+// on(require('http').createServer(), {
+//   request: (req, res) => res.end(`Hello ${req.url}\n`),
+//   error: (err) => console.log('error', err)
+// }).listen(8000)
+const on = (object, listeners) => (Object.keys(listeners).forEach(event => object.on(event, listeners[event])), object);
+
 module.exports = {
 	checksum,
 	entropy,
